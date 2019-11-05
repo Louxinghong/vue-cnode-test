@@ -8230,10 +8230,10 @@ vue-eslint-parser@^5.0.0:
     esquery "^1.0.1"
     lodash "^4.17.11"
 
-vue-function-api@^3.0.0-beta.0:
-  version "3.0.0-beta.0"
-  resolved "http://maven.opsylfin.tk/repository/npm-all/vue-function-api/-/vue-function-api-3.0.0-beta.0.tgz#647db6b5691193af73a9c21cbae6228ecc837998"
-  integrity sha1-ZH22tWkRk69zqcIcuuYijsyDeZg=
+vue-function-api@2.0.6:
+  version "2.0.6"
+  resolved "http://maven.opsylfin.tk/repository/npm-all/vue-function-api/-/vue-function-api-2.0.6.tgz#d3fc7a02ce9599d0af3869fbc76a43d88aeace24"
+  integrity sha1-0/x6As6VmdCvOGn7x2pD2IrqziQ=
   dependencies:
     tslib "^1.9.3"
 
