@@ -33,7 +33,7 @@ import {
   onMounted,
   onUnmounted
 } from 'vue-function-api'
-import { newsContent } from '@/api/news.js'
+import { getNews } from '@/api/news.js'
 
 function useScroll () {
   const pageOffset = value(0)
@@ -55,7 +55,7 @@ function useNewsContent (props) {
     () => props.id,
     async id => {
       isLoading.value = true
-      const news = await newsContent()
+      const news = await getNews()
       console.log(news)
       posts.value = news.data
       isLoading.value = false
