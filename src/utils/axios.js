@@ -1,82 +1,51 @@
 import axios from 'axios'
 import { Message } from 'view-design'
 
-// 创建axios实例
-const service = axios.create({
-  timeout: 80000 // 请求超时时间
-})
-// 添加request拦截器
-service.interceptors.request.use(
+/**
+ * Global HTTP Setting
+ */
+axios.defaults.timeout = 60000
+axios.defaults.baseURL = ''
+
+// http Request instance
+const httpInstance = axios.create()
+// Merge axios to httpInstance,
+Object.setPrototypeOf(httpInstance, axios)
+
+// Add a request interceptor
+httpInstance.interceptors.request.use(
   config => {
-    return config
-  },
-  error => {
-    Promise.reject(error)
-  }
-)
-// 添加respone拦截器
-service.interceptors.response.use(
-  response => {
-    let res = {}
-    res = response.data
-    return res
-  },
-  error => {
-    if (error.response && error.response.status === 404) {
-      Message.warning({
-        background: true,
-        content: '请求失败'
-      })
+    const defaultData = {}
+
+    if (config.method === 'post') {
+      config.data = Object.assign(defaultData, config.data)
     }
 
-    return Promise.reject(error.response)
+    if (config.method === 'get') {
+      config.params = Object.assign(defaultData, config.params)
+    }
+    return config
+  },
+  e => {
+    Message.warning('请求失败, 请稍后再试!')
+    return Promise.reject(e)
   }
 )
 
-export function get (url, params = {}) {
-  params.t = new Date().getTime() // get方法加一个时间参数,解决ie下可能缓存问题.
-  return service({
-    url: url,
-    method: 'get',
-    headers: {},
-    params
-  })
-}
-
-// 封装post请求
-export function post (url, data = {}) {
-  // 默认配置
-  let sendObject = {
-    url: url,
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8'
-    },
-    data: data
+// Add a response interceptor
+httpInstance.interceptors.response.use(
+  res => {
+    return res
+  },
+  e => {
+    const statusCode = e.response.status
+    if (statusCode === 404) {
+      Message.warning('接口已被关闭!')
+    } else {
+      Message.warning('请求超时或服务器出错!')
+    }
+    return Promise.reject(e)
   }
-  sendObject.data = JSON.stringify(data)
-  return service(sendObject)
-}
+)
 
-// 封装put方法 (resfulAPI常用)
-export function put (url, data = {}) {
-  return service({
-    url: url,
-    method: 'put',
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8'
-    },
-    data: JSON.stringify(data)
-  })
-}
-// 删除方法(resfulAPI常用)
-export function deletes (url) {
-  return service({
-    url: url,
-    method: 'delete',
-    headers: {}
-  })
-}
-
-// 不要忘记export
-export default service
+export default httpInstance

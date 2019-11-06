@@ -1,7 +1,7 @@
 import axios from '@/utils/axios.js'
 
-export const getNews = () => {
-  return axios.get('https://cnodejs.org/api/v1/topics')
+export function getNews (params) {
+  return axios.get('https://cnodejs.org/api/v1/topics', { params })
 }
 
 // export function newsContent () {
