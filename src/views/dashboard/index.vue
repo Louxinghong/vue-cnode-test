@@ -19,7 +19,9 @@
       </Spin>
     </div>
     <div class="item" :class="{loading: loading}" v-for="(item, index) in lists" :key="index">
-      <img class="avatar" :src="item.author.avatar_url" alt />
+      <router-link :to="{name: 'User', params: {loginname: item.author.loginname}}" class="avatar">
+        <img :src="item.author.avatar_url" alt />
+      </router-link>
       <span class="reply-visit">{{item.reply_count}}/{{item.visit_count}}</span>
       <span
         class="tab-status"
@@ -267,6 +269,11 @@ export default {
       width: 4.5%;
       height: 80%;
       cursor: pointer;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
 
     .reply-visit {

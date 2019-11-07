@@ -40,7 +40,7 @@ httpInstance.interceptors.response.use(
   e => {
     const statusCode = e.response.status
     if (statusCode === 404) {
-      Message.warning('接口已被关闭!')
+      Message.warning('接口出错!')
     } else {
       Message.warning('请求超时或服务器出错!')
     }

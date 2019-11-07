@@ -21,15 +21,30 @@ const routes = [
     ]
   },
   {
+    path: '/user',
+    component: Layout,
+    name: 'User',
+    redirect: '/user/user-detail/:loginname',
+    children: [
+      {
+        path: 'user-detail/:loginname',
+        name: 'UserDetail',
+        component: () =>
+          import(/* webpackChunkName: 'user' */ '@/views/user/index.vue')
+      }
+    ]
+  },
+  {
     path: '/home',
     name: 'home',
     component: () =>
       import(/* webpackChunkName: 'home' */ '@/views/home/index.vue')
   },
   {
-    path: '/test',
-    name: 'Test',
-    component: () => import(/* webpackChunkName: 'test' */ '@/layout/index.vue')
+    path: '/login',
+    name: 'Login',
+    component: () =>
+      import(/* webpackChunkName: 'login' */ '@/views/login/index.vue')
   }
 ]
 
