@@ -3,13 +3,19 @@
     <div class="content">
       <Menu mode="horizontal" active-name="1">
         <MenuItem name="1">
-          <Icon type="ios-paper" />首页
+          <router-link to="/">
+            <Icon type="ios-paper" />首页
+          </router-link>
         </MenuItem>
         <MenuItem name="2">
-          <Icon type="logo-github" />个人中心
+          <a href="https://github.com/Louxinghong/vue-cnode-test" ref target="_blank">
+            <Icon type="logo-github" />个人中心
+          </a>
         </MenuItem>
         <MenuItem name="3">
-          <Icon type="md-person" />登录
+          <router-link to="/login">
+            <Icon type="md-person" />登录
+          </router-link>
         </MenuItem>
       </Menu>
 
