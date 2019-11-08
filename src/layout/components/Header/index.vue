@@ -1,23 +1,23 @@
 <template>
   <header class="header">
     <div class="content">
-      <Menu mode="horizontal" active-name="1">
-        <MenuItem name="1">
+      <ul>
+        <li>
           <router-link to="/">
             <Icon type="ios-paper" />首页
           </router-link>
-        </MenuItem>
-        <MenuItem name="2">
+        </li>
+        <li>
           <a href="https://github.com/Louxinghong/vue-cnode-test" ref target="_blank">
             <Icon type="logo-github" />个人中心
           </a>
-        </MenuItem>
-        <MenuItem name="3">
+        </li>
+        <li>
           <router-link to="/login">
             <Icon type="md-person" />登录
           </router-link>
-        </MenuItem>
-      </Menu>
+        </li>
+      </ul>
 
       <img :src="headerImg" alt />
     </div>
@@ -41,8 +41,9 @@ export default {
   background: #ffffff;
   top: 0;
   width: 100%;
-  height: 80px;
+  height: 60px;
   z-index: 10;
+  box-shadow: 0 2px 1px rgba(129, 129, 129, 0.418);
 
   .content {
     position: absolute;
@@ -56,17 +57,32 @@ export default {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    align-items: center;
+
+    ul {
+      margin-left: 40px;
+      padding: 5px;
+      font-size: 15px;
+      list-style-type: none;
+      display: flex;
+      flex-flow: row nowrap;
+      // border-bottom: 2px solid #515a6e;
+
+      & > :not(:first-child) {
+        margin-left: 20px;
+      }
+
+      li {
+        a:hover {
+          color: rgba(0, 0, 255, 0.692);
+        }
+      }
+    }
 
     img {
       width: 50px;
       height: 50px;
       border-radius: 50%;
-    }
-
-    .ivu-menu {
-      display: inline-block;
-      width: 50% !important;
-      height: 50px !important;
     }
   }
 }

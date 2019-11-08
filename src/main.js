@@ -6,6 +6,7 @@ import { plugin } from 'vue-function-api'
 import ViewUi from 'view-design'
 import filters from './filters'
 import NProgress from 'nprogress'
+import components from './components'
 import 'nprogress/nprogress.css'
 import 'view-design/dist/styles/iview.css'
 import './styles/main.less'
@@ -25,6 +26,11 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach(() => {
   NProgress.done()
+})
+
+// 注册全局组件
+Object.keys(components).forEach(key => {
+  Vue.component(key, components[key])
 })
 
 // 注册全局过滤器

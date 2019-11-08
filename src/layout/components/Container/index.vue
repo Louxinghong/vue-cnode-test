@@ -7,16 +7,30 @@
 </template>
 
 <script>
+import { onCreated, watch } from 'vue-function-api'
+
 export default {
-  name: 'Container'
+  name: 'Container',
+  setup (props, context) {
+    onCreated(() => {
+      window.scrollTo(0, 0)
+    })
+
+    watch(
+      () => context.root.$route,
+      (to, from) => {
+        window.scrollTo(0, 0)
+      }
+    )
+  }
 }
 </script>
 
 <style lang="less" scoped>
 .container {
-  height: 1400px;
+  min-height: 100vh;
   position: relative;
-  margin: 80px 0 0;
+  margin: 60px 0 0;
 
   .content {
     height: 100%;

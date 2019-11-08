@@ -31,6 +31,26 @@ const routes = [
         name: 'UserDetail',
         component: () =>
           import(/* webpackChunkName: 'user' */ '@/views/user/index.vue')
+      },
+      {
+        path: 'user-collection/:loginname',
+        name: 'UserCollection',
+        component: () =>
+          import(/* webpackChunkName: 'user' */ '@/views/collection/index.vue')
+      }
+    ]
+  },
+  {
+    path: '/topic',
+    component: Layout,
+    name: 'Topic',
+    redirect: '/topic/topic-detail/:id',
+    children: [
+      {
+        path: 'topic-detail/:id',
+        name: 'TopicDetail',
+        component: () =>
+          import(/* webpackChunkName: 'topic' */ '@/views/topic/index.vue')
       }
     ]
   },

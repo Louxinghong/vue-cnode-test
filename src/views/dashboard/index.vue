@@ -18,18 +18,8 @@
         <Icon type="ios-loading" size="55" class="load"></Icon>
       </Spin>
     </div>
-    <div class="item" :class="{loading: loading}" v-for="(item, index) in lists" :key="index">
-      <router-link :to="{name: 'User', params: {loginname: item.author.loginname}}" class="avatar">
-        <img :src="item.author.avatar_url" alt />
-      </router-link>
-      <span class="reply-visit">{{item.reply_count}}/{{item.visit_count}}</span>
-      <span
-        class="tab-status"
-        :class="'tab-status-' + item.tab"
-      >{{'tab' in item ? transTag(item.tab, $route.query.tab) : '一般'}}</span>
-      <span class="title">{{item.title}}</span>
-      <span class="create-date">{{transDate(item.create_at)}}</span>
-    </div>
+    <topic-list :lists="lists" :loading="loading"></topic-list>
+
     <Page
       :class="{loading: loading}"
       :total="total"
@@ -117,45 +107,13 @@ export default {
       }
     )
 
-    const transTag = (tab, routeTab) => {
-      if (tab === 'undefined') {
-        return '一般'
-      } else {
-        return routeTab === 'good'
-          ? tabStatus.value.find(item => item.value === routeTab).label
-          : tabStatus.value.find(item => item.value === tab).label
-      }
-    }
-
-    const transDate = props => {
-      // const nowDate = value(new Date())
-      const beforeDate = new Date(props)
-      const nowDate = new Date()
-      const longTime = (nowDate.getTime() - beforeDate.getTime()) / 1000
-      if (longTime < 0) {
-        return ''
-      } else if (longTime < 30) {
-        return '刚刚'
-      } else if (longTime < 60) {
-        return parseInt(longTime) + '秒前'
-      } else if (longTime / 60 < 60) {
-        return parseInt(longTime / 60) + '分钟前'
-      } else if (longTime / 3600 < 24) {
-        return parseInt(longTime / 3600) + '小时前'
-      } else if (longTime / 86400 < 31) {
-        return parseInt(longTime / 86400) + '天前'
-      } else if (longTime / 2592000 < 12) {
-        return parseInt(longTime / 2592000) + '月前'
-      } else {
-        return parseInt(longTime / 31536000) + '年前'
-      }
-    }
-
     const currentChange = page => {
       context.root.$router.push({
         name: context.root.$route.name,
         query: {
-          tab: context.root.$route.query.tab,
+          tab: context.root.$route.query.tab
+            ? context.root.$route.query.tab
+            : 'all',
           page: page
         }
       })
@@ -169,8 +127,6 @@ export default {
       total,
       loading,
       tabStatus,
-      transTag,
-      transDate,
       currentChange
     }
   }
@@ -221,7 +177,7 @@ export default {
   .waiting {
     position: relative;
     width: 300px;
-    height: 300px;
+    height: 1500px;
     display: none;
     margin: 0 auto;
     padding-top: 50px;
@@ -245,87 +201,6 @@ export default {
           transform: rotate(360deg);
         }
       }
-    }
-  }
-
-  .item {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-
-    &.loading {
-      display: none;
-    }
-
-    &:not(:last-child) {
-      border-bottom: 1px solid #ffffff;
-    }
-
-    & > :not(:first-child) {
-      margin-left: 10px;
-    }
-    .avatar {
-      width: 4.5%;
-      height: 80%;
-      cursor: pointer;
-
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    .reply-visit {
-      width: 10%;
-      text-align: center;
-    }
-
-    .tab-status {
-      width: 55px;
-      color: #000000;
-      background: #ffffff;
-      text-align: center;
-      border-radius: 5px;
-      font-size: 13px;
-      padding: 3px 0;
-
-      &.tab-status-good {
-        color: #ffffff;
-        background: #80bd01;
-      }
-      &.tab-status-share {
-        color: #ffffff;
-        background: rgb(235, 116, 5);
-      }
-      &.tab-status-ask {
-        color: #ffffff;
-        background: crimson;
-      }
-      &.tab-status-job {
-        color: #ffffff;
-        background: rgb(41, 104, 240);
-      }
-      &.tab-status-dev {
-        color: #ffffff;
-        background: rgb(128, 126, 126);
-      }
-    }
-
-    .title {
-      width: 80%;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      cursor: pointer;
-    }
-
-    .create-date {
-      position: relative;
-      width: 80px;
-      font-size: 12px;
-      text-align: center;
-      margin-right: 10px;
     }
   }
 
