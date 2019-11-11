@@ -73,6 +73,10 @@ export default {
       }
 
       li {
+        .ivu-icon {
+          margin-right: 8px;
+        }
+
         a:hover {
           color: rgba(0, 0, 255, 0.692);
         }
