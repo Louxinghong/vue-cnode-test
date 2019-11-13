@@ -23,8 +23,7 @@ export default {
           lists.value = res.data.data
           loading.value = false
         })
-        .catch(error => {
-          console.log(error)
+        .catch(() => {
           loading.value = false
         })
     })

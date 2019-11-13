@@ -54,15 +54,18 @@ import { value, onCreated } from 'vue-function-api'
 export default {
   name: 'User',
   setup (props, context) {
+    const loading = value(false)
     const userDetail = value({})
 
     onCreated(async () => {
+      loading.value = true
       await getUserDetail(context.root.$route.params.loginname)
         .then(res => {
+          loading.value = false
           userDetail.value = res.data.data
         })
-        .catch(error => {
-          console.log(error)
+        .catch(() => {
+          loading.value = false
         })
     })
 
