@@ -56,7 +56,6 @@ function useNewsContent (props) {
     async id => {
       isLoading.value = true
       const news = await getNews()
-      console.log(news)
       posts.value = news.data
       isLoading.value = false
     }

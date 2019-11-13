@@ -7,7 +7,7 @@ const components = requireComponents.keys().reduce((total, path) => {
   if (global) {
     total[name] = component
   }
-  console.log(total)
+
   return total
 }, {})
 
