@@ -25,6 +25,7 @@
       :total="total"
       :page-size="pageSize"
       :current.sync="page"
+      size="small"
       show-elevator
       @on-change="currentChange"
     />

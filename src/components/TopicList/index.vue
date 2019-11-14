@@ -7,8 +7,8 @@
       <span class="reply-visit">{{item.reply_count}}/{{item.visit_count}}</span>
       <span
         class="tab-status"
-        :class="'tab-status-' + item.tab"
-      >{{'tab' in item ? transTag(item.tab, $route.query.tab) : '一般'}}</span>
+        :class="'tab-status-' + ($route.query.tab === 'all' ? item.tab : $route.query.tab)"
+      >{{transTag(item, $route.query.tab)}}</span>
       <router-link :to="{ name: 'Topic', params: {id: item.id}}" class="title">
         <span>{{item.title}}</span>
       </router-link>
@@ -50,13 +50,13 @@ export default {
   setup (props, context) {
     const { tabStatus } = tabSort(props)
 
-    const transTag = (tab, routeTab) => {
-      if (tab === 'undefined') {
-        return '一般'
+    const transTag = (data, routeTab) => {
+      if (routeTab === 'good') {
+        return '精华'
+      } else if ('tab' in data) {
+        return tabStatus.value.find(item => item.value === data.tab).label
       } else {
-        return routeTab === 'good'
-          ? tabStatus.value.find(item => item.value === routeTab).label
-          : tabStatus.value.find(item => item.value === tab).label
+        return '一般'
       }
     }
 
@@ -93,6 +93,22 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@media screen and (min-width: 600px) {
+  .item {
+    .reply-visit {
+      display: inline-block;
+    }
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .item {
+    .reply-visit {
+      display: none;
+    }
+  }
+}
+
 .topic-list {
   height: 100%;
   .item {

@@ -27,6 +27,20 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@media screen and (min-width: 600px) {
+  .content {
+    width: 80%;
+    margin: 0 10%;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .content {
+    width: 95%;
+    margin: 0 2.5%;
+  }
+}
+
 .container {
   min-height: 100vh;
   position: relative;
@@ -34,8 +48,6 @@ export default {
 
   .content {
     height: 100%;
-    width: 80%;
-    margin: 0 10%;
     padding: 20px 0;
   }
 }
