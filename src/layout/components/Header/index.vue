@@ -36,6 +36,28 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@media screen and (min-width: 600px) {
+  .content {
+    width: 90%;
+
+    ul {
+      margin-left: 40px;
+      font-size: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .content {
+    width: 100%;
+
+    ul {
+      margin-left: 10px;
+      font-size: 10px;
+    }
+  }
+}
+
 .header {
   position: fixed;
   background: #ffffff;
@@ -47,7 +69,6 @@ export default {
 
   .content {
     position: absolute;
-    width: 90%;
     height: 50px;
     top: 0;
     left: 0;
@@ -60,9 +81,7 @@ export default {
     align-items: center;
 
     ul {
-      margin-left: 40px;
       padding: 5px;
-      font-size: 15px;
       list-style-type: none;
       display: flex;
       flex-flow: row nowrap;
