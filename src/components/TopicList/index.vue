@@ -9,7 +9,10 @@
         class="tab-status"
         :class="'tab-status-' + ($route.query.tab === 'all' ? item.tab : $route.query.tab)"
       >{{transTag(item, $route.query.tab)}}</span>
-      <router-link :to="{ name: 'Topic', params: {id: item.id}}" class="title">
+      <router-link
+        :to="{ name: 'Topic', params: {tab: $route.query.tab === 'all' ? item.tab : $route.query.tab, id: item.id}}"
+        class="title"
+      >
         <span>{{item.title}}</span>
       </router-link>
 

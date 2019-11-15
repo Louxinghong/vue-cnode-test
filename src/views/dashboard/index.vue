@@ -62,7 +62,10 @@ export default {
 
     onCreated(async () => {
       loading.value = true
-      page.value = parseInt(context.root.$route.query.page) || 1
+      context.root.$router.replace({
+        path: 'dashboard',
+        query: { tab: 'all', page: 1 }
+      })
       await getNews({
         limit: pageSize.value,
         mdrender: false,

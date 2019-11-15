@@ -2,8 +2,8 @@
   <div class="topic">
     <div class="topic-top">
       <p class="title-tag">
+        <span class="tag" :class="$route.params.tab">{{tabStatus[$route.params.tab]}}</span>
         <span class="title">{{topicDetail.title}}</span>
-        <span class="tag" :class="topicDetail.tab">{{tabStatus[topicDetail.tab]}}</span>
       </p>
       <p class="author">
         <span>作者 {{topicDetail.author.loginname}}</span>
@@ -82,6 +82,27 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@media screen and (min-width: 600px) {
+  .title-tag {
+    display: flex;
+    align-items: center;
+    .title {
+      font-size: 35px;
+    }
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .title-tag {
+    .title {
+      font-size: 20px;
+    }
+  }
+  .author {
+    font-size: 10px;
+  }
+}
+
 .topic {
   position: relative;
   width: 100%;
@@ -92,23 +113,19 @@ export default {
 
   .topic-top {
     width: 100%;
-    height: 100px;
     border-bottom: 1px solid rgb(194, 193, 193);
     padding: 0 10px 10px;
     margin-bottom: 20px;
 
     .title-tag {
       position: relative;
-      display: flex;
-      align-items: center;
-      margin: auto 0;
+
       .title {
-        font-size: 25px;
         font-weight: 600;
       }
 
       .tag {
-        margin-left: 10px;
+        margin-right: 10px;
         display: inline-block;
         border-radius: 5px;
         padding: 2px 5px;
