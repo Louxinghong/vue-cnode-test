@@ -2,7 +2,7 @@
   <div class="topic">
     <div class="topic-top">
       <p class="title-tag">
-        <span class="tag" :class="$route.params.tab">{{tabStatus[$route.params.tab]}}</span>
+        <span class="tag" :class="topicDetail.tab">{{tabStatus[topicDetail.tab]}}</span>
         <span class="title">{{topicDetail.title}}</span>
       </p>
       <p class="author">

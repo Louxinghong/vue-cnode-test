@@ -24,7 +24,9 @@
               </router-link>
               <span
                 class="last-time"
+                v-if="!isMobile"
               >上一次回复于{{item.last_reply_at | dateFormat('YYYY-MM-DD HH:mm:ss')}}</span>
+              <span class="last-time" v-else>{{item.last_reply_at | dateFormat('YYYY-MM-DD')}}</span>
             </li>
           </ul>
         </div>
@@ -38,7 +40,11 @@
               <router-link :to="{ name: 'Topic', params: {id: item.id}}" class="title">
                 <span>{{item.title}}</span>
               </router-link>
-              <span>上一次回复于{{item.last_reply_at | dateFormat('YYYY-MM-DD HH:mm:ss')}}</span>
+              <span
+                class="last-time"
+                v-if="!isMobile"
+              >上一次回复于{{item.last_reply_at | dateFormat('YYYY-MM-DD HH:mm:ss')}}</span>
+              <span class="last-time" v-else>{{item.last_reply_at | dateFormat('YYYY-MM-DD')}}</span>
             </li>
           </ul>
         </div>
@@ -49,13 +55,15 @@
 
 <script>
 import { getUserDetail } from '@/api/user'
-import { value, onCreated } from 'vue-function-api'
+import { value, onCreated, watch } from 'vue-function-api'
+import { state } from '@/store/app.js'
 
 export default {
   name: 'User',
   setup (props, context) {
     const loading = value(false)
     const userDetail = value({})
+    const isMobile = value(false)
 
     onCreated(async () => {
       loading.value = true
@@ -69,14 +77,66 @@ export default {
         })
     })
 
+    watch(
+      () => state.isMobile,
+      val => {
+        isMobile.value = val
+        console.log(isMobile.value)
+      }
+    )
+
     return {
-      userDetail
+      userDetail,
+      isMobile
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+@media screen and (min-width: 600px) {
+  .user-topic-reply {
+    li {
+      img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .title {
+        font-size: 15px;
+      }
+
+      .last-time {
+        display: inline-block;
+        width: 35%;
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .user-topic-reply {
+    li {
+      img {
+        width: 15%;
+        height: 70%;
+        margin: 0 5px;
+      }
+
+      .title {
+        font-size: 10px;
+      }
+
+      .last-time {
+        display: inline-block;
+        width: 35%;
+        font-size: 10px;
+      }
+    }
+  }
+}
+
 .user {
   position: relative;
   width: 100%;
@@ -101,21 +161,9 @@ export default {
     }
 
     .avatar {
-      width: 200px;
-      height: 200px;
+      width: 90%;
+      height: 90%;
       border-radius: 50%;
-    }
-
-    .name {
-      font-size: 23px;
-    }
-
-    .score {
-      font-size: 15px;
-    }
-
-    .create-date {
-      font-size: 13px;
     }
   }
 
@@ -156,24 +204,12 @@ export default {
             align-items: center;
             height: 50px;
 
-            img {
-              width: 40px;
-              height: 40px;
-            }
-
             .title {
               width: 50%;
               overflow: hidden;
               white-space: nowrap;
               text-overflow: ellipsis;
               cursor: pointer;
-              font-size: 15px;
-            }
-
-            .last-time {
-              display: inline-block;
-              width: 35%;
-              font-size: 10px;
             }
           }
         }

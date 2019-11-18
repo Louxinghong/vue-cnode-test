@@ -44,10 +44,10 @@ const routes = [
     path: '/topic',
     component: Layout,
     name: 'Topic',
-    redirect: '/topic/topic-detail/:tab/:id',
+    redirect: '/topic/topic-detail/:id',
     children: [
       {
-        path: 'topic-detail/:tab/:id',
+        path: 'topic-detail/:id',
         name: 'TopicDetail',
         component: () =>
           import(/* webpackChunkName: 'topic' */ '@/views/topic/index.vue')

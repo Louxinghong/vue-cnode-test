@@ -55,6 +55,10 @@ export default {
       margin-left: 10px;
       font-size: 10px;
     }
+
+    img {
+      margin-right: 10px;
+    }
   }
 }
 

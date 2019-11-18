@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 export const state = Vue.observable({
-  isMobile: false
+  isMobile: !(document.body.getBoundingClientRect().width > 600)
 })
 
 export function judgeIsMobile (data) {
@@ -12,6 +12,6 @@ export function judgeIsMobile (data) {
   } else {
     state.isMobile = false
   }
-
-  console.log(state.isMobile)
 }
+
+export default state
