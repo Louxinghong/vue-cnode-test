@@ -50,7 +50,6 @@ export default {
     })
 
     const handleSubmit = () => {
-      console.log(context)
       context.refs.form.validate()
 
       try {

@@ -81,7 +81,6 @@ export default {
       () => state.isMobile,
       val => {
         isMobile.value = val
-        console.log(isMobile.value)
       }
     )
 
