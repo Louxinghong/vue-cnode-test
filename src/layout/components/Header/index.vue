@@ -3,19 +3,19 @@
     <div class="content">
       <ul class="navigation">
         <li>
-          <router-link to="/"> <Icon type="ios-paper" />首页 </router-link>
+          <router-link to="/">
+            <Icon type="ios-paper" />首页
+          </router-link>
         </li>
         <li>
-          <a
-            href="https://github.com/Louxinghong/vue-cnode-test"
-            ref
-            target="_blank"
-          >
+          <a href="https://github.com/Louxinghong/vue-cnode-test" ref target="_blank">
             <Icon type="logo-github" />个人中心
           </a>
         </li>
         <li>
-          <router-link to="/login"> <Icon type="md-person" />登录 </router-link>
+          <router-link to="/login">
+            <Icon type="md-person" />登录
+          </router-link>
         </li>
       </ul>
 
@@ -132,11 +132,17 @@ export default {
         }
       }
     }
-
-    img {
-      width: 50px;
+    .ivu-dropdown {
       height: 50px;
-      border-radius: 50%;
+      /deep/ .ivu-dropdown-rel {
+        height: 50px;
+
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+      }
     }
   }
 }

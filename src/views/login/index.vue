@@ -7,12 +7,7 @@
 
     <Form ref="form" :model="form" :rules="rules">
       <FormItem prop="user">
-        <Input
-          type="text"
-          v-model="form.user"
-          prefix="ios-person-outline"
-          placeholder="Username"
-        />
+        <Input type="text" v-model="form.user" prefix="ios-person-outline" placeholder="Username" />
       </FormItem>
       <FormItem prop="password">
         <Input
@@ -23,9 +18,7 @@
         />
       </FormItem>
       <FormItem>
-        <Button class="submit-btn" type="primary" @click="handleSubmit"
-          >登录</Button
-        >
+        <Button class="submit-btn" type="primary" @click="handleSubmit">登录</Button>
       </FormItem>
     </Form>
   </div>
@@ -57,21 +50,19 @@ export default {
     })
 
     const handleSubmit = () => {
-      console.log(context.refs.form)
-      context.refs.form.validate(valid => {
-        if (valid) {
-          try {
-            this.$Message.success('登录成功')
-            setToken(form.value)
-            context.root.$router.replace({
-              path: 'dashboard',
-              query: { tab: 'all', page: 1 }
-            })
-          } catch (error) {
-            this.$Message.error('登录失败')
-          }
-        }
-      })
+      console.log(context)
+      context.refs.form.validate()
+
+      try {
+        context.root.$Message.success('登录成功')
+        setToken(form.value)
+        context.root.$router.replace({
+          path: 'dashboard',
+          query: { tab: 'all', page: 1 }
+        })
+      } catch (error) {
+        context.root.$Message.error('登录失败')
+      }
     }
 
     return {
