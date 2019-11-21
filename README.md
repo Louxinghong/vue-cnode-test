@@ -1,5 +1,10 @@
 # vue-cnode-test
 
+# 在线预览
+```
+[在线预览](https://louxinghong.github.io/vue-cnode-test/dist)
+```
+
 ## Project setup
 ```
 yarn install
